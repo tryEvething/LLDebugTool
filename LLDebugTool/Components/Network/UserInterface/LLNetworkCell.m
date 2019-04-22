@@ -32,6 +32,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
 @property (strong , nonatomic) LLNetworkModel *model;
 
 @end
@@ -49,6 +51,12 @@
         self.hostLabel.text = _model.url.host;
         self.paramLabel.text = _model.url.path;
         self.dateLabel.text = [_model.startDate substringFromIndex:11];
+        self.statusLabel.text = _model.statusCode;
+        if ([_model.statusCode isEqualToString:@"200"]) {
+            self.statusLabel.textColor = [UIColor colorWithRed:80/255.0 green:201/255.0 blue:41/255.0 alpha:1.0];
+        }else{
+            self.statusLabel.textColor = [UIColor colorWithRed:255/255.0 green:11/255.0 blue:40/255.0 alpha:1.0];
+        }
     }
 }
 

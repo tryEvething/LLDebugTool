@@ -227,6 +227,8 @@ static NSString *const kNetworkCellID = @"NetworkCellID";
                 BOOL checkHeader = [self.currentTypes containsObject:@"Header"];
                 BOOL checkBody = [self.currentTypes containsObject:@"Body"];
                 BOOL checkResponse = [self.currentTypes containsObject:@"Response"];
+//                BOOL checkSuccess = [self.currentTypes containsObject:@"Success"];
+//                BOOL checkError = [self.currentTypes containsObject:@"Error"];
                 BOOL needPop = YES;
                 
                 if (checkHeader && model.headerString.length) {
@@ -253,6 +255,21 @@ static NSString *const kNetworkCellID = @"NetworkCellID";
                     continue;
                 }
             }
+            
+            if (self.currentTypes.count) {
+                BOOL checkSuccess = [self.currentTypes containsObject:@"Success"];
+                BOOL checkError = [self.currentTypes containsObject:@"Error"];
+                if (!checkSuccess || !checkError) {
+                    if (checkSuccess && ![model.statusCode isEqualToString:@"200"]) {
+                        [tempArray addObject:model];
+                        continue;
+                    }
+                    if (checkError && [model.statusCode isEqualToString:@"200"]) {
+                        [tempArray addObject:model];
+                        continue;
+                    }
+                }
+            }
 
             
             // Filter Date
@@ -277,7 +294,7 @@ static NSString *const kNetworkCellID = @"NetworkCellID";
 
 - (void)showDeleteAlertWithIndexPaths:(NSArray *)indexPaths {
     if (indexPaths.count) {
-        [self showAlertControllerWithMessage:@"Sure to remove items ?" handler:^(NSInteger action) {
+        [self showAlertControllerWithMessage:@"是否删除所有网络请求?" handler:^(NSInteger action) {
             if (action == 1) {
                 [self deleteFilesWithIndexPaths:indexPaths];
             }

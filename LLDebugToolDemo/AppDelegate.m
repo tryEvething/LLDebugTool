@@ -21,12 +21,12 @@
 
     //####################### Color Style #######################//
     // Uncomment one of the following lines to change the color configuration.
-    // [LLConfig sharedConfig].colorStyle = LLConfigColorStyleSystem;
+     [LLConfig sharedConfig].colorStyle = LLConfigColorStyleSimple;
     // [[LLConfig sharedConfig] configBackgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] statusBarStyle:UIStatusBarStyleDefault];
     
     //####################### User Identity #######################//
     // Use this line to tag user. More config please see "LLConfig.h".
-    [LLConfig sharedConfig].userIdentity = @"Miss L";
+    [LLConfig sharedConfig].userIdentity = @"L";
     
     //####################### Window Style #######################//
     // Uncomment one of the following lines to change the window style.

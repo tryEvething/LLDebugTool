@@ -59,6 +59,20 @@
         _dateLabel.attributedText = nil;
     }
     _messageLabel.text = model.message ?: @"None Message";
+    switch (model.level) {
+        case LLConfigLogLevelAlert:
+            _messageLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
+            break;
+        case LLConfigLogLevelWarning:
+            _messageLabel.textColor = [UIColor colorWithRed:255/255.0 green:185/255.0 blue:72/255.0 alpha:1.0];
+            break;
+        case LLConfigLogLevelError:
+            _messageLabel.textColor = [UIColor colorWithRed:255/255.0 green:11/255.0 blue:40/255.0 alpha:1.0];
+            break;
+        default:
+            _messageLabel.textColor = [UIColor colorWithRed:68/255.0 green:68/255.0 blue:68/255.0 alpha:1.0];
+            break;
+    }
 }
 
 #pragma mark - Primary

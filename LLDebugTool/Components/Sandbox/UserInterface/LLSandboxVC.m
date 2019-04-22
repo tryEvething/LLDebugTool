@@ -68,15 +68,15 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
         }
     } else {
         btn.selected = !btn.selected;
-        self.selectAllItem.title = @"Select All";
+        self.selectAllItem.title = @"全选";
         [self.tableView setEditing:NO animated:YES];
         [self.navigationController setToolbarHidden:YES animated:YES];
     }
 }
 
 - (void)selectAllItemClick:(UIBarButtonItem *)item {
-    if ([item.title isEqualToString:@"Select All"]) {
-        item.title = @"Cancel All";
+    if ([item.title isEqualToString:@"全选"]) {
+        item.title = @"取消选择";
         self.shareItem.enabled = YES;
         self.deleteItem.enabled = YES;
         for (int i = 0; i < self.sandboxModel.subModels.count; i++) {
@@ -84,7 +84,7 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
             [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
     } else {
-        item.title = @"Select All";
+        item.title = @"全选";
         self.shareItem.enabled = NO;
         self.deleteItem.enabled = NO;
         for (int i = 0; i < self.sandboxModel.subModels.count; i++) {
@@ -151,16 +151,16 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
     }
     
     // ToolBar
-    self.selectAllItem = [[UIBarButtonItem alloc] initWithTitle:@"Select All" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItemClick:)];
+    self.selectAllItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItemClick:)];
     self.selectAllItem.tintColor = LLCONFIG_TEXT_COLOR;
     
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    self.shareItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:self action:@selector(shareItemClick:)];
+    self.shareItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(shareItemClick:)];
     self.shareItem.tintColor = LLCONFIG_TEXT_COLOR;
     self.shareItem.enabled = NO;
     
-    self.deleteItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deleteItemClick:)];
+    self.deleteItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(deleteItemClick:)];
     self.deleteItem.tintColor = LLCONFIG_TEXT_COLOR;
     self.deleteItem.enabled = NO;
     [self setToolbarItems:@[self.selectAllItem,spaceItem,self.shareItem,self.deleteItem] animated:YES];
@@ -171,7 +171,7 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
 
 - (void)showDeleteAlertWithIndexPaths:(NSArray *)indexPaths {
     if (indexPaths.count) {
-        [self showAlertControllerWithMessage:@"Sure to remove items ?" handler:^(NSInteger action) {
+        [self showAlertControllerWithMessage:@"是否删除所选项?" handler:^(NSInteger action) {
             if (action == 1) {
                 [self deleteFilesWithIndexPaths:indexPaths];
             }
@@ -248,9 +248,9 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
         }
     } else {
         if (self.tableView.indexPathsForSelectedRows.count == self.sandboxModel.subModels.count) {
-            self.selectAllItem.title = @"Cancel All";
+            self.selectAllItem.title = @"取消选择";
         } else {
-            self.selectAllItem.title = @"Select All";
+            self.selectAllItem.title = @"全选";
         }
         self.shareItem.enabled = YES;
         self.deleteItem.enabled = YES;
@@ -258,8 +258,8 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.selectAllItem.title isEqualToString:@"Select All"] == NO) {
-        self.selectAllItem.title = @"Select All";
+    if ([self.selectAllItem.title isEqualToString:@"全选"] == NO) {
+        self.selectAllItem.title = @"全选";
     }
     if (self.tableView.indexPathsForSelectedRows.count == 0) {
         self.shareItem.enabled = NO;

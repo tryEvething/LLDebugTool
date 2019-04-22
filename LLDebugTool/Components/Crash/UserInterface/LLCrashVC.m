@@ -75,15 +75,15 @@ static NSString *const kCrashCellID = @"CrashCellID";
 }
 
 - (void)selectAllItemClick:(UIBarButtonItem *)item {
-    if ([item.title isEqualToString:@"Select All"]) {
-        item.title = @"Cancel All";
+    if ([item.title isEqualToString:@"全选"]) {
+        item.title = @"取消选择";
         self.deleteItem.enabled = YES;
         for (int i = 0; i < self.dataArray.count; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
     } else {
-        item.title = @"Select All";
+        item.title = @"全选";
         self.deleteItem.enabled = NO;
         for (int i = 0; i < self.dataArray.count; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
@@ -126,8 +126,8 @@ static NSString *const kCrashCellID = @"CrashCellID";
     } else {
         self.deleteItem.enabled = YES;
         if (self.tableView.indexPathsForSelectedRows.count == self.dataArray.count) {
-            if ([self.selectAllItem.title isEqualToString:@"Select All"]) {
-                self.selectAllItem.title = @"Cancel All";
+            if ([self.selectAllItem.title isEqualToString:@"全选"]) {
+                self.selectAllItem.title = @"取消选择";
             }
         }
     }
@@ -135,8 +135,8 @@ static NSString *const kCrashCellID = @"CrashCellID";
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
-        if ([self.selectAllItem.title isEqualToString:@"Select All"] == NO) {
-            self.selectAllItem.title = @"Select All";
+        if ([self.selectAllItem.title isEqualToString:@"全选"] == NO) {
+            self.selectAllItem.title = @"全选";
         }
         if (self.tableView.indexPathsForSelectedRows.count == 0) {
             self.deleteItem.enabled = NO;
@@ -172,12 +172,12 @@ static NSString *const kCrashCellID = @"CrashCellID";
     self.navigationItem.rightBarButtonItem = item;
     
     // ToolBar
-    self.selectAllItem = [[UIBarButtonItem alloc] initWithTitle:@"Select All" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItemClick:)];
+    self.selectAllItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItemClick:)];
     self.selectAllItem.tintColor = LLCONFIG_TEXT_COLOR;
     
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
-    self.deleteItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deleteItemClick:)];
+    self.deleteItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(deleteItemClick:)];
     self.deleteItem.tintColor = LLCONFIG_TEXT_COLOR;
     self.deleteItem.enabled = NO;
     [self setToolbarItems:@[self.selectAllItem,spaceItem,self.deleteItem] animated:YES];
@@ -200,7 +200,7 @@ static NSString *const kCrashCellID = @"CrashCellID";
 
 - (void)_showDeleteAlertWithIndexPaths:(NSArray *)indexPaths {
     if (indexPaths.count) {
-        [self showAlertControllerWithMessage:@"Sure to remove items ?" handler:^(NSInteger action) {
+        [self showAlertControllerWithMessage:@"是否删除所选项?" handler:^(NSInteger action) {
             if (action == 1) {
                 [self _deleteFilesWithIndexPaths:indexPaths];
             }

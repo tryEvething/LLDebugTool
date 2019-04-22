@@ -133,7 +133,7 @@ static LLDebugTool *_instance = nil;
     _version = _isBetaVersion ? [_versionNumber stringByAppendingString:@"(BETA)"] : _versionNumber;
     
     // Check version.
-    [self checkVersion];
+//    [self checkVersion];
     
     // Set window.
     CGFloat windowWidth = [LLConfig sharedConfig].suspensionBallWidth;

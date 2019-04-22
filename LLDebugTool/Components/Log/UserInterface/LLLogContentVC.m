@@ -113,7 +113,22 @@ static NSString *const kLogContentCellID = @"LogContentCellID";
         }
         
         [self.titleArray addObject:@"Level"];
-        [self.contentArray addObject:@"level"];
+        NSString *level;
+        switch (self.model.level) {
+            case LLConfigLogLevelAlert:
+                level = @"提示";
+                break;
+            case LLConfigLogLevelWarning:
+                level = @"警告";
+                break;
+            case LLConfigLogLevelError:
+                level = @"错误";
+                break;
+            default:
+                level = @"普通";
+                break;
+        }
+        [self.contentArray addObject:level];
 
         if (self.model.userIdentity.length) {
             [self.titleArray addObject:@"UserIdentity"];

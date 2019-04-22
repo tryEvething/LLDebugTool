@@ -248,7 +248,9 @@
         LLFilterLabelModel *model1 = [[LLFilterLabelModel alloc] initWithMessage:@"Header"];
         LLFilterLabelModel *model2 = [[LLFilterLabelModel alloc] initWithMessage:@"Body"];
         LLFilterLabelModel *model3 = [[LLFilterLabelModel alloc] initWithMessage:@"Response"];
-        [_typeView updateDataArray:@[model1,model2,model3]];
+        LLFilterLabelModel *model4 = [[LLFilterLabelModel alloc] initWithMessage:@"Success"];
+        LLFilterLabelModel *model5 = [[LLFilterLabelModel alloc] initWithMessage:@"Error"];
+        [_typeView updateDataArray:@[model1,model2,model3,model4,model5]];
         __weak typeof(self) weakSelf = self;
         _typeView.changeBlock = ^(NSArray *types) {
             weakSelf.currentTypes = types;
